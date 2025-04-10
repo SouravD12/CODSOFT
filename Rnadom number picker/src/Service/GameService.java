@@ -18,27 +18,35 @@ public class GameService {
 		int randomNumber = random.nextInt(100);
 		while(tempCount<=count) {
 			int a = userService.numberPicker();
-			diff = randomNumber-a;
-			if(diff!=randomNumber) {
+//			diff = randomNumber-a;
+			if(a!=randomNumber) {
 				System.out.println("Wrong number picked");
 			}
-			else if(diff==randomNumber) {
+			else if(a==randomNumber) {
 				break;
 			}
 			tempCount+=1;
 		}
+		String ans = "";
 		if (tempCount>count) {
+			System.out.println("Your score is"+" "+getUserScore(tempCount));
+			System.out.println("The correct number was"+" "+randomNumber);
 			playAnotherRound(userService);
 		}
-		System.out.println("Your score is"+" "+getUserScore(tempCount));
-		System.out.println("The correct number was"+" "+randomNumber);
-		System.out.println("Thank you for Playing");
 //		return getUserScore(tempCount);
+//		if(!("No").equalsIgnoreCase(playAnotherRound(userService))){
+//			System.out.println(playAnotherRound(userService));
+//		}
+		else if(tempCount<=count) {
+			System.out.println("Congratulations!!!!! Your score is"+" "+getUserScore(tempCount));
+		}
+
 	}
 	
 	private void playAnotherRound(UserService userService) {
 		System.out.println("Do you want to play another round?");
 		System.out.println("Please enter Yes or No");
+		String ans ="";
 		String s = scanner.next();
 		if(!s.equalsIgnoreCase("Yes")&&(!s.equalsIgnoreCase("No"))) {
 			System.out.println("Please enter a valid text");
@@ -46,6 +54,9 @@ public class GameService {
 		}
 		if(s.equalsIgnoreCase("Yes")) {
 			displayUserScore(userService);
+		}
+		if(s.equalsIgnoreCase("No")) {
+			System.out.println("Thank you for playing!!");
 		}
 	}
 	
